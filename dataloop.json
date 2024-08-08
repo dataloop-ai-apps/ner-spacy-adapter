@@ -1,0 +1,110 @@
+{
+    "name": "spacy-ner-model-adapter",
+    "version": "0.1.1",
+    "description": "spaCy is a library for advanced Natural Language Processing in Python and Cython. It's built on the very latest research, and was designed from day one to be used in real products.",
+    "attributes": {
+        "Provider": "spaCy",
+        "Deployed By": "Dataloop",
+        "License": "MIT",
+        "Category": "Model",
+        "Media Type": [
+            "Text"
+        ],
+        "NLP": "Token Classification"
+    },
+    "displayName": "spaCy NER",
+    "scope": "public",
+    "components": {
+        "computeConfigs": [
+            {
+                "name": "spacy-ner-deploy",
+                "secrets": [],
+                "runtime": {
+                    "podType": "regular-l",
+                    "runnerImage": "gcr.io/viewo-g/piper/agent/runner/apps/spacy-ner-adapter:0.1.0",
+                    "concurrency": 1,
+                    "autoscaler": {
+                        "type": "rabbitmq",
+                        "minReplicas": 0,
+                        "maxReplicas": 2,
+                        "queueLength": 1000
+                    },
+                    "preemptible": false
+                }
+            }
+        ],
+        "modules": [
+            {
+                "name": "spacy-ner-module",
+                "entryPoint": "adapter.py",
+                "className": "Adapter",
+                "computeConfig": "spacy-ner-deploy",
+                "initInputs": [
+                    {
+                        "type": "Model",
+                        "name": "model_entity"
+                    }
+                ],
+                "functions": [
+                    {
+                        "name": "predict_items",
+                        "input": [
+                            {
+                                "type": "Item[]",
+                                "name": "items",
+                                "description": "The input images for prediction."
+                            }
+                        ],
+                        "output": [
+                            {
+                                "type": "Item[]",
+                                "name": "items",
+                                "description": "The same input images for prediction."
+                            },
+                            {
+                                "type": "Annotation[]",
+                                "name": "annotations",
+                                "description": "The predicted annotations."
+                            }
+                        ],
+                        "displayName": "Predict Items",
+                        "displayIcon": "",
+                        "description": "The inference function of the model."
+                    },
+                    {
+                        "name": "predict_dataset",
+                        "input": [
+                            {
+                                "type": "Dataset",
+                                "name": "dataset",
+                                "description": "The input dataset of the items required for prediction."
+                            },
+                            {
+                                "type": "Json",
+                                "name": "filters",
+                                "description": "The DQL in json format to get all the items required for prediction."
+                            }
+                        ],
+                        "output": [],
+                        "displayName": "Predict Dataset",
+                        "displayIcon": "",
+                        "description": "Inference function of the model on a dataset."
+                    }
+                ]
+            }
+        ],
+        "models": [
+            {
+                "name": "spacy-ner-model",
+                "moduleName": "spacy-ner-module",
+                "scope": "project",
+                "status": "pre-trained",
+                "configuration": {
+                    "model_name": "en_core_web_sm"
+                },
+                "metadata": {},
+                "description": "spaCy NER"
+            }
+        ]
+    }
+}
