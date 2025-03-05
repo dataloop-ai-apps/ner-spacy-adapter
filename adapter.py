@@ -4,7 +4,7 @@ import dtlpy as dl
 
 class Adapter(dl.BaseModelAdapter):
     def load(self, local_path, **kwargs):
-        model_name = self.configuration.get('model_name', "en_core_web_sm")
+        model_name = self.configuration.get('model_name', 'en_core_web_sm')
         self.nlp = spacy.load(model_name)
 
     def prepare_item_func(self, item: dl.Item):
@@ -24,11 +24,6 @@ class Adapter(dl.BaseModelAdapter):
                 sentence += split_str
                 results = self.nlp(sentence)
                 for entity in results.ents:
-                    # print("=========")
-                    # print(entity.label_)
-                    # print(entity.text)
-                    # print(entity.start_char + offset)
-                    # print(entity.end_char + offset)
                     collection.add(dl.Text(text_type='block',
                                            label=entity.label_,
                                            start=entity.start_char + offset,
