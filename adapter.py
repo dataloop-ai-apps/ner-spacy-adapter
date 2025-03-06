@@ -8,6 +8,8 @@ class Adapter(dl.BaseModelAdapter):
         self.nlp = spacy.load(model_name)
 
     def prepare_item_func(self, item: dl.Item):
+        if not item.mimetype.startswith('text'):
+            raise ValueError(f'This model only works with text items. Got item with mimetype: {item.mimetype}')
         buffer = item.download(save_locally=False)
         text = buffer.read().decode()
         return text
@@ -30,6 +32,7 @@ class Adapter(dl.BaseModelAdapter):
                                            end=entity.end_char + offset
                                            ),
                                    model_info={'name': self.model_entity.name,
+                                               'model_id': self.model_entity.id,
                                                'confidence': 1.})
                 offset += len(sentence)
             batch_annotations.append(collection)

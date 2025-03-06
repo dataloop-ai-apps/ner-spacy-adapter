@@ -1,8 +1,8 @@
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-
 import dtlpy as dl
+import os
+import sys
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from adapter import Adapter
 
 
@@ -15,7 +15,7 @@ def prd():
 
 if __name__ == '__main__':
     # dl.login()
-    dl.setenv('rc')
+    # dl.setenv('rc')
 
     project = dl.projects.get(project_id='')
 
