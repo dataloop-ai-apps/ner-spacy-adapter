@@ -6,5 +6,5 @@ ENV HOME=/tmp
 RUN pip install spacy
 RUN python -m spacy download en_core_web_sm
 
-# docker build -t gcr.io/viewo-g/piper/agent/runner/apps/spacy-ner-adapter:0.1.1 -f Dockerfile .
-# docker push gcr.io/viewo-g/piper/agent/runner/apps/spacy-ner-adapter:0.1.1
+# docker build -t gcr.io/viewo-g/piper/agent/runner/apps/ner-spacy-adapter:0.1.1 -f Dockerfile .
+# docker push gcr.io/viewo-g/piper/agent/runner/apps/ner-spacy-adapter:0.1.1
