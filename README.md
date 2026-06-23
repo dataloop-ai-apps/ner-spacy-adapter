@@ -1,6 +1,6 @@
 # SpaCy NER Model Adapter
 
-Welcome to the SpaCy NER Model Adapter repository, an application designed to demonstrate the integration of spaCy's Named Entity Recognition (NER) capabilities within the Dataloop platform. This solution is available under the `Models` tab in the Dataloop Marketplace.
+Welcome to the SpaCy NER Model Adapter repository, an application designed to demonstrate the integration of spaCy's Named Entity Recognition (NER) capabilities within the DDOE platform. This solution is available under the `Models` tab in the DDOE Marketplace.
 
 ## Table of Contents
 
@@ -16,13 +16,13 @@ The SpaCy NER Model Adapter leverages spaCy's advanced NLP capabilities to perfo
 
 - **Text Processing**: Efficiently process and annotate text data.
 - **NER Model Integration**: Utilize pre-trained spaCy models for entity recognition.
-- **Scalable Deployment**: Deploy and manage models on the Dataloop platform with ease.
+- **Scalable Deployment**: Deploy and manage models on the DDOE platform with ease.
 
 ## Installation
 
 To install the SpaCy NER Model Adapter:
 
-1. Navigate to the **Marketplace** on the Dataloop platform.
+1. Navigate to the **Marketplace** on the DDOE platform.
 2. Select the **Models** tab.
 3. Search for the "SpaCy NER" app.
 4. Click on **Install** to add the solution to your workspace.
